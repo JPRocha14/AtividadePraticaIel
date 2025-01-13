@@ -1,0 +1,23 @@
+@model IEnumerable<IELStudentManager.Models.Estudante>
+
+<h1>Lista de Estudantes</h1>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Endereço</th>
+        <th>Data de Conclusão</th>
+    </tr>
+    @foreach (var estudante in Model)
+    {
+        <tr>
+            <td>@estudante.Nome</td>
+            <td>@estudante.CPF</td>
+            <td>@estudante.Endereco</td>
+            <td>@estudante.DataConclusao.ToShortDateString()</td>
+        </tr>
+    }
+</table>
+
+<a href="/Estudante/Create">Novo Estudante</a>
