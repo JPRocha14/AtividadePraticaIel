@@ -1,0 +1,36 @@
+# Arquivos e pastas do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de logs
+*.log
+
+# Arquivos temporários
+*.tmp
+
+# Configurações específicas do usuário
+.vscode/
+.vs/
+*.user
+*.suo
+
+# Dependências e pacotes
+bin/
+obj/
+*.nupkg
+*.snupkg
+
+# Pastas de publicação
+wwwroot/
+
+# Arquivos gerados pelo build
+*.dll
+*.exe
+*.pdb
+
+# Configurações do EF Core
+Migrations/
+
+# Banco de dados local
+*.db
+*.sqlite
