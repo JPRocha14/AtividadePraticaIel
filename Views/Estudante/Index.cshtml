@@ -15,8 +15,13 @@
 
 <!-- Campo de Pesquisa à direita -->
 <div class="d-flex justify-content-end mb-3">
-   <form method="get" asp-action="Index" class="d-flex">
-        <input type="text" name="searchTerm" class="form-control" placeholder="Pesquisar..." />
+   <form method="get" asp-action="Search" class="d-flex">
+        <!-- Campo de Pesquisa por Nome, CPF ou Endereço -->
+        <input type="text" name="searchTerm" class="form-control" placeholder="Pesquisar..." value="@ViewData["SearchTerm"]" />
+
+        <!-- Campo de Pesquisa por Data de Conclusão -->
+        <input type="date" name="dataConclusao" class="form-control ms-2" value="@ViewData["DataConclusao"]" />
+
         <button type="submit" class="btn btn-primary ms-2">Pesquisar</button>
     </form>
 </div>

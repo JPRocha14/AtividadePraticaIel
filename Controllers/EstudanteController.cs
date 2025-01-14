@@ -56,21 +56,34 @@ namespace IELStudentManager.Controllers
         }
 
         // Exibir estudantes com base na pesquisa
-        public IActionResult Search(string searchTerm = null)
+        public IActionResult Search(string searchTerm = null, DateTime? dataConclusao = null)
         {
-            searchTerm = searchTerm?.Trim();
+            searchTerm = searchTerm?.Trim();  // Remover espaços extras do termo de pesquisa
 
-            var estudantes = string.IsNullOrEmpty(searchTerm)
-                ? _context.Estudantes.ToList()
-                : _context.Estudantes
-                     .Where(e => e.Nome.ToLower().Contains(searchTerm.ToLower()) ||  // Nome: insensível a maiúsculas/minúsculas
-                        e.CPF.Contains(searchTerm) ||                        // CPF: texto exato
-                        e.Endereco.ToLower().Contains(searchTerm.ToLower()))   // Endereço: insensível a maiúsculas/minúsculas
-                    .ToList();
+            var estudantes = _context.Estudantes.AsQueryable();
 
-            return View(estudantes);  // Chama a view Index passando os estudantes filtrados
+            // Filtragem por nome, CPF e endereço
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                estudantes = estudantes
+                    .Where(e => e.Nome.ToLower().Contains(searchTerm.ToLower()) ||  // Nome: insensível a maiúsculas/minúsculas
+                                e.CPF.Contains(searchTerm) ||                        // CPF: texto exato
+                                e.Endereco.ToLower().Contains(searchTerm.ToLower()));   // Endereço: insensível a maiúsculas/minúsculas
+            }
+
+            // Filtragem por data de conclusão (se a data for fornecida)
+            if (dataConclusao.HasValue)
+            {
+                estudantes = estudantes.Where(e => e.DataConclusao.Date == dataConclusao.Value.Date);
+            }
+
+            // Passa a lista filtrada para a view
+            var resultList = estudantes.ToList();
+            ViewData["SearchTerm"] = searchTerm;
+            ViewData["DataConclusao"] = dataConclusao?.ToString("yyyy-MM-dd");
+
+            return View("Index", resultList);
         }
-
         // Ação GET para confirmar exclusão
         public IActionResult Delete(int id)
         {
