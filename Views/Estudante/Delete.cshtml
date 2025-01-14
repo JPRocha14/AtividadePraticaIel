@@ -1,0 +1,15 @@
+@model IELStudentManager.Models.Estudante
+
+@{
+    ViewData["Title"] = "Excluir Estudante";
+}
+
+<h2>Excluir Estudante</h2>
+
+<p>Tem certeza que deseja excluir o estudante <strong>@Model.Nome</strong>?</p>
+
+<!-- Formulário para confirmar a exclusão -->
+<form method="post" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
+    <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+    <a href="@Url.Action("Index", "Estudante")" class="btn btn-secondary">Cancelar</a>
+</form>

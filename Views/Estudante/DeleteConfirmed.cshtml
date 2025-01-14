@@ -1,0 +1,13 @@
+@model IELStudentManager.Models.Estudante
+
+@{
+    ViewData["Title"] = "Exclusão Confirmada";
+}
+
+<div class="text-center">
+    <h2 class="text-success">O Aluno foi excluído com sucesso!</h2>
+    <p>O estudante <strong>@Model.Nome</strong> foi removido da lista de estudantes.</p>
+
+    <!-- Botão para retornar à lista de estudantes -->
+    <a href="@Url.Action("Index", "Estudante")" class="btn btn-primary">Lista de Estudantes</a>
+</div>

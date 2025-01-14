@@ -1,23 +1,48 @@
 @model IEnumerable<IELStudentManager.Models.Estudante>
 
-<h1>Lista de Estudantes</h1>
+@{
+    ViewData["Title"] = "Lista de Estudantes";
+}
 
-<table>
-    <tr>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>Endereço</th>
-        <th>Data de Conclusão</th>
-    </tr>
-    @foreach (var estudante in Model)
-    {
+<div class="text-center mb-4">
+    <h1 class="display-6 text-primary">Lista de Estudantes</h1>
+</div>
+
+<!-- Botão "Novo Estudante" à esquerda -->
+<div class="d-flex justify-content-start mb-3">
+    <a href="@Url.Action("Create", "Estudante")" class="btn btn-success">Novo Estudante</a>
+</div>
+
+<!-- Campo de Pesquisa à direita -->
+<div class="d-flex justify-content-end mb-3">
+   <form method="get" asp-action="Index" class="d-flex">
+        <input type="text" name="searchTerm" class="form-control" placeholder="Pesquisar..." />
+        <button type="submit" class="btn btn-primary ms-2">Pesquisar</button>
+    </form>
+</div>
+
+<table class="table table-bordered table-striped text-center">
+    <thead class="bg-primary text-white">
         <tr>
-            <td>@estudante.Nome</td>
-            <td>@estudante.CPF</td>
-            <td>@estudante.Endereco</td>
-            <td>@estudante.DataConclusao.ToShortDateString()</td>
+            <th style="width: 20%;">Nome</th>
+            <th style="width: 15%;">CPF</th>
+            <th>Endereço</th>
+            <th style="width: 15%;">Data de Conclusão</th>
+            <th>Ações</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var estudante in Model)
+        {
+            <tr>
+                <td>@estudante.Nome</td>
+                <td>@estudante.CPF</td>
+                <td>@estudante.Endereco</td>
+                <td>@estudante.DataConclusao.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a href="/Estudante/Delete/@estudante.Id" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
-
-<a href="/Estudante/Create">Novo Estudante</a>

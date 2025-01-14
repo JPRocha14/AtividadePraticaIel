@@ -12,7 +12,7 @@ namespace IELStudentManager.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O CPF é obrigatório")]
-        [RegularExpression(@"\d{3}\.\d{3}\.\d{3}-\d{2}", ErrorMessage = "CPF inválido")]
+        [RegularExpression(@"^\d{11}$", ErrorMessage = "CPF inválido. O CPF deve conter apenas números.")]
         public string CPF { get; set; }
 
         [MaxLength(200, ErrorMessage = "O endereço deve ter no máximo 200 caracteres")]
