@@ -20,5 +20,5 @@ Aplicação web em **ASP.NET Core MVC** para gerenciar estudantes do **IEL**.
    git clone <url-do-repositório>
 2. Configure a string de conexão no arquivo appsettings.json.
 3. Execute os seguintes comandos para configurar o banco de dados e iniciar a aplicação:
-   dotnet ef database update
-   dotnet run
+   - dotnet ef database update
+   - dotnet run
